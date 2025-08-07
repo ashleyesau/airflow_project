@@ -1,0 +1,7 @@
+project:
+    name: project
+    
+volumes:
+  - "./dbt:/usr/local/airflow/dbt"  # Main dbt mount
+  - "./dbt/target:/usr/local/airflow/dbt/target"  # Explicit manifest mount
+  - "./include:/usr/local/airflow/include"  # If using service account

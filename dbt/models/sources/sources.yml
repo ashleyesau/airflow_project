@@ -1,0 +1,11 @@
+
+# sources.yml
+version: 2
+
+sources:
+  - name: retail
+    database: airflow-tutorial-467517
+
+    tables:
+      - name: raw_invoices
+      - name: country

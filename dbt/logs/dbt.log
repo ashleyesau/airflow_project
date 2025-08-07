@@ -1,0 +1,58 @@
+[0m18:49:08.741205 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11067e950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x111819ba0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x111819ff0>]}
+
+
+============================== 18:49:08.747970 | fbe96b46-9e92-44eb-b641-8f7c658f435e ==============================
+[0m18:49:08.747970 [info ] [MainThread]: Running with dbt=1.10.6
+[0m18:49:08.748887 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/Users/ashley/project/dbt', 'debug': 'False', 'version_check': 'True', 'log_path': '/Users/ashley/project/dbt/logs', 'warn_error': 'None', 'fail_fast': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'log_format': 'default', 'introspect': 'True', 'invocation_command': 'dbt deps', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m18:49:09.007403 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'fbe96b46-9e92-44eb-b641-8f7c658f435e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11181be50>]}
+[0m18:49:09.055986 [debug] [MainThread]: Set downloads directory='/var/folders/vx/c047fxr95g7fk6_z2z130n840000gn/T/dbt-downloads-tmwdmdx9'
+[0m18:49:09.057122 [debug] [MainThread]: Making package index registry request: GET https://hub.getdbt.com/api/v1/index.json
+[0m18:49:09.477146 [debug] [MainThread]: Response from registry index: GET https://hub.getdbt.com/api/v1/index.json 200
+[0m18:49:09.479492 [debug] [MainThread]: Making package registry request: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json
+[0m18:49:09.741630 [debug] [MainThread]: Response from registry: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json 200
+[0m18:49:09.773727 [info ] [MainThread]: Updating lock file in file path: /Users/ashley/project/dbt/package-lock.yml
+[0m18:49:09.781095 [debug] [MainThread]: Set downloads directory='/var/folders/vx/c047fxr95g7fk6_z2z130n840000gn/T/dbt-downloads-mdaay4i4'
+[0m18:49:09.790755 [info ] [MainThread]: Installing dbt-labs/dbt_utils
+[0m18:49:10.357304 [info ] [MainThread]: Installed from version 1.3.0
+[0m18:49:10.358383 [info ] [MainThread]: Up to date!
+[0m18:49:10.359540 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'package', 'label': 'fbe96b46-9e92-44eb-b641-8f7c658f435e', 'property_': 'install', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11098a650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x111984340>]}
+[0m18:49:10.521796 [debug] [MainThread]: Resource report: {"command_name": "deps", "command_success": true, "command_wall_clock_time": 1.9005127, "process_in_blocks": "0", "process_kernel_time": 0.613003, "process_mem_max_rss": "100589568", "process_out_blocks": "0", "process_user_time": 2.288866}
+[0m18:49:10.523454 [debug] [MainThread]: Command `dbt deps` succeeded at 18:49:10.523085 after 1.90 seconds
+[0m18:49:10.524711 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11067e950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11098a650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11181a2c0>]}
+[0m18:49:10.526166 [debug] [MainThread]: Flushing usage events
+[0m18:49:11.770657 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:49:18.205157 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e882980>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10fa16320>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10fa15ed0>]}
+
+
+============================== 18:49:18.209734 | 9a1375de-4aa6-4267-8a18-ee63407b3a68 ==============================
+[0m18:49:18.209734 [info ] [MainThread]: Running with dbt=1.10.6
+[0m18:49:18.210583 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': '/Users/ashley/project/dbt', 'fail_fast': 'False', 'warn_error': 'None', 'log_path': '/Users/ashley/project/dbt/logs', 'version_check': 'True', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'False', 'log_format': 'default', 'introspect': 'True', 'invocation_command': 'dbt compile', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'send_anonymous_usage_stats': 'True'}
+[0m18:49:23.923226 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '9a1375de-4aa6-4267-8a18-ee63407b3a68', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f83a770>]}
+[0m18:49:24.010884 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '9a1375de-4aa6-4267-8a18-ee63407b3a68', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f353100>]}
+[0m18:49:24.011809 [info ] [MainThread]: Registered adapter: bigquery=1.10.1
+[0m18:49:24.432947 [debug] [MainThread]: checksum: f6e4baf4de20596ffb9d14e6ef805989eb0e1950dedc3cc83d03f20aa023904c, vars: {}, profile: , target: , version: 1.10.6
+[0m18:49:24.434806 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m18:49:24.435449 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '9a1375de-4aa6-4267-8a18-ee63407b3a68', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1233aee90>]}
+[0m18:49:26.444406 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '9a1375de-4aa6-4267-8a18-ee63407b3a68', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x123b74cd0>]}
+[0m18:49:26.548701 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/ashley/project/dbt/target/manifest.json
+[0m18:49:26.552652 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/ashley/project/dbt/target/semantic_manifest.json
+[0m18:49:26.594470 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '9a1375de-4aa6-4267-8a18-ee63407b3a68', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x123b2dc60>]}
+[0m18:49:26.595450 [info ] [MainThread]: Found 7 models, 2 sources, 612 macros
+[0m18:49:26.596069 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '9a1375de-4aa6-4267-8a18-ee63407b3a68', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x123b74910>]}
+[0m18:49:26.598787 [info ] [MainThread]: 
+[0m18:49:26.599702 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m18:49:26.600435 [info ] [MainThread]: 
+[0m18:49:26.601816 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:49:26.611046 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_airflow-tutorial-467517_retail'
+[0m18:49:26.611775 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:49:26.613480 [debug] [ThreadPool]: BigQuery adapter: Got an error when attempting to create a bigquery " "client: '[Errno 2] No such file or directory: '/usr/local/airflow/include/gcp/service_account.json''
+[0m18:49:26.614755 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:49:26.615486 [debug] [MainThread]: BigQuery adapter: Got an error when attempting to create a bigquery " "client: '[Errno 2] No such file or directory: '/usr/local/airflow/include/gcp/service_account.json''
+[0m18:49:26.617776 [error] [MainThread]: Encountered an error:
+Database Error
+  [Errno 2] No such file or directory: '/usr/local/airflow/include/gcp/service_account.json'
+[0m18:49:26.623203 [debug] [MainThread]: Resource report: {"command_name": "compile", "command_success": false, "command_wall_clock_time": 8.519594, "process_in_blocks": "0", "process_kernel_time": 1.142159, "process_mem_max_rss": "335585280", "process_out_blocks": "0", "process_user_time": 7.514128}
+[0m18:49:26.625114 [debug] [MainThread]: Command `dbt compile` failed at 18:49:26.624300 after 8.52 seconds
+[0m18:49:26.626444 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e882980>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x123b307c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x123b30790>]}
+[0m18:49:26.627347 [debug] [MainThread]: Flushing usage events
+[0m18:49:28.677697 [debug] [MainThread]: An error was encountered while trying to flush usage events

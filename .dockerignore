@@ -1,0 +1,16 @@
+astro
+.git
+.env
+airflow_settings.yaml
+logs/
+.venv
+airflow.db
+include/gcp/service_account.json
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.DS_Store
+.vscode/
+.idea/
+dbt/target/

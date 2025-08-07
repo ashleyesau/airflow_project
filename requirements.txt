@@ -1,0 +1,10 @@
+# Core dependencies
+astronomer-cosmos[dbt-bigquery]==1.4.0
+
+soda-core-bigquery==3.5.5
+
+# Google dependencies
+apache-airflow-providers-google>=10.4.0
+google-cloud-bigquery>=2.0.0
+google-cloud-bigquery-storage>=2.0.0
+protobuf>=4.0.0
