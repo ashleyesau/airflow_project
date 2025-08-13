@@ -4,9 +4,17 @@ FROM astrocrpublic.azurecr.io/runtime:3.0-6
 # Set working directory inside container
 WORKDIR /app
 
-# Copy requirements.txt and install Python dependencies
+# Copy requirements.txt and install Python dependencies for main Airflow environment
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
+# --- Create isolated venv for dbt + cosmos ---
+# This will have the versions compatible with your current astronomer-cosmos
+RUN python -m venv /usr/local/airflow/dbt_cosmos_env \
+    && . /usr/local/airflow/dbt_cosmos_env/bin/activate \
+    && pip install --no-cache-dir --upgrade pip \
+    && pip install "astronomer-cosmos[dbt-bigquery]==1.10.0" \
+    && pip install "dbt-core==1.9.1" "dbt-bigquery==1.9.1"
 
 # Switch to root user to install system-level dependencies
 USER root
@@ -27,9 +35,6 @@ USER astro
 COPY dags/ /app/dags/
 COPY plugins/ /app/plugins/
 COPY include/ /app/include/
-
-# Keep dbt folder path consistent with your DAG/Cosmos config.
-# If your DAG expects manifest at /app/dbt/target/manifest.json, keep this as is.
 COPY dbt/ /app/dbt/
 
 # Copy Airflow configuration file if you want it baked in (optional)

@@ -1,6 +1,5 @@
-# Core dependencies
-astronomer-cosmos[dbt-bigquery]==1.4.0
-
+# Core dependencies for main Airflow environment
+astronomer-cosmos[dbt-bigquery]==1.10.0
 soda-core-bigquery==3.5.5
 
 # Google dependencies

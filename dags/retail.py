@@ -1,29 +1,15 @@
 from airflow.decorators import dag, task
-from airflow.operators.bash import BashOperator
-from datetime import datetime
+from airflow.operators.python import ExternalPythonOperator
 from airflow.providers.google.cloud.transfers.local_to_gcs import LocalFilesystemToGCSOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateEmptyDatasetOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
+from datetime import datetime
 import os
-from pathlib import Path
 
-# DEBUG: Check file system access
-print("=" * 50)
-print("DEBUG: File system check")
-print(f"Current working directory: {os.getcwd()}")
-print(f"/usr/local/airflow exists: {os.path.exists('/usr/local/airflow')}")
-print(f"/usr/local/airflow/dbt exists: {os.path.exists('/usr/local/airflow/dbt')}")
-print(f"/usr/local/airflow/dbt/dbt_project.yml exists: {os.path.exists('/usr/local/airflow/dbt/dbt_project.yml')}")
-print(f"/usr/local/airflow/dbt/target exists: {os.path.exists('/usr/local/airflow/dbt/target')}")
-print(f"/usr/local/airflow/dbt/target/manifest.json exists: {os.path.exists('/usr/local/airflow/dbt/target/manifest.json')}")
-if os.path.exists('/usr/local/airflow'):
-    print(f"Contents of /usr/local/airflow: {os.listdir('/usr/local/airflow')}")
-if os.path.exists('/usr/local/airflow/dbt'):
-    print(f"Contents of /usr/local/airflow/dbt: {os.listdir('/usr/local/airflow/dbt')}")
-if os.path.exists('/usr/local/airflow/dbt/target'):
-    print(f"Contents of /usr/local/airflow/dbt/target: {os.listdir('/usr/local/airflow/dbt/target')}")
-print("=" * 50)
+# Path to the isolated Python venv created in Dockerfile
+ISOLATED_PYTHON = "/usr/local/airflow/dbt_cosmos_env/bin/python"
 
+# Schema definition for raw_invoices table
 schema_fields = [
     {"name": "InvoiceNo", "type": "STRING", "mode": "NULLABLE"},
     {"name": "StockCode", "type": "STRING", "mode": "NULLABLE"},
@@ -75,55 +61,58 @@ def retail():
     def check_load(scan_name='check_load', checks_subpath='sources'):
         from include.soda.check_function import check
         return check(scan_name, checks_subpath)
-        
+
     check_load_task = check_load()
 
-    from cosmos.airflow.task_group import DbtTaskGroup
-    from cosmos.config import ProjectConfig, RenderConfig
-    from cosmos.constants import LoadMode
-    from dbt.cosmos_config import DBT_CONFIG  
+    # --------- dbt transform ----------
+    def run_dbt_transform():
+        import subprocess
+        project_dir = "/usr/local/airflow/dbt"
+        profiles_dir = "/usr/local/airflow/dbt"
+        subprocess.run(
+            [
+                "dbt", "run",
+                "--select", "path:models/transform",
+                "--project-dir", project_dir,
+                "--profiles-dir", profiles_dir,
+                "--full-refresh"
+            ],
+            check=True
+        )
 
-    project_dir = "/usr/local/airflow/dbt"
-    manifest_path = str(Path(project_dir) / "target" / "manifest.json")
-
-    transform = DbtTaskGroup(
-        group_id='transform',
-        project_config=ProjectConfig(
-            dbt_project_path=project_dir,
-            manifest_path=manifest_path,
-        ),
-        profile_config=DBT_CONFIG,
-        render_config=RenderConfig(
-            load_method=LoadMode.DBT_MANIFEST,  
-        ),
-        operator_args={
-            "install_deps": False,
-            "full_refresh": True,
-        },
+    transform = ExternalPythonOperator(
+        task_id="transform",
+        python=ISOLATED_PYTHON,
+        python_callable=run_dbt_transform
     )
 
     @task
     def check_transform(scan_name='check_transform', checks_subpath='transform'):
         from include.soda.check_function import check
         return check(scan_name, checks_subpath)
-    
+
     check_transform_task = check_transform()
 
-    report = DbtTaskGroup(
-        group_id='report',
-        project_config=ProjectConfig(
-            dbt_project_path=project_dir,
-            manifest_path=manifest_path,
-        ),
-        profile_config=DBT_CONFIG,
-        render_config=RenderConfig(
-            load_method=LoadMode.DBT_MANIFEST,
-            select=['path:models/report'],
-        ),
-        operator_args={
-            "install_deps": False,
-            "full_refresh": True,
-        },
+    # --------- dbt report ----------
+    def run_dbt_report():
+        import subprocess
+        project_dir = "/usr/local/airflow/dbt"
+        profiles_dir = "/usr/local/airflow/dbt"
+        subprocess.run(
+            [
+                "dbt", "run",
+                "--select", "path:models/report",
+                "--project-dir", project_dir,
+                "--profiles-dir", profiles_dir,
+                "--full-refresh"
+            ],
+            check=True
+        )
+
+    report = ExternalPythonOperator(
+        task_id="report",
+        python=ISOLATED_PYTHON,
+        python_callable=run_dbt_report
     )
 
     @task
@@ -135,8 +124,8 @@ def retail():
 
     (
         upload_csv_to_gcs
-        >> create_retail_dataset 
-        >> gcs_to_raw 
+        >> create_retail_dataset
+        >> gcs_to_raw
         >> check_load_task
         >> transform
         >> check_transform_task
